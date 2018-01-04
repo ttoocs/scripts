@@ -1,0 +1,1 @@
+/home/fu-fu/source/minetest/norm/rungame.sh

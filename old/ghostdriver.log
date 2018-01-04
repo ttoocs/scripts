@@ -1,0 +1,18 @@
+[INFO  - 2017-01-09T03:12:52.684Z] GhostDriver - Main - running on port 33859
+[INFO  - 2017-01-09T03:12:52.824Z] Session [82313c10-d619-11e6-893d-e5ede688ed65] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
+[INFO  - 2017-01-09T03:12:52.824Z] Session [82313c10-d619-11e6-893d-e5ede688ed65] - page.customHeaders:  - {}
+[INFO  - 2017-01-09T03:12:52.824Z] Session [82313c10-d619-11e6-893d-e5ede688ed65] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"linux-unknown-64bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2017-01-09T03:12:52.824Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 82313c10-d619-11e6-893d-e5ede688ed65
+[ERROR - 2017-01-09T03:12:53.348Z] Session [82313c10-d619-11e6-893d-e5ede688ed65] - page.onError - msg: TypeError: undefined is not an object (evaluating 'document.getElementsByTagName("body")[0].appendChild')
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-01-09T03:12:53.348Z] Session [82313c10-d619-11e6-893d-e5ede688ed65] - page.onError - stack:
+  Initialize (undefined:1)
+  (anonymous function) (:1)
+
+  phantomjs://platform/console++.js:263 in error
+[INFO  - 2017-01-09T03:12:55.642Z] Session [82313c10-d619-11e6-893d-e5ede688ed65] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
+[INFO  - 2017-01-09T03:12:55.642Z] Session [82313c10-d619-11e6-893d-e5ede688ed65] - page.customHeaders:  - {}
+[ERROR - 2017-01-09T03:13:07.905Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1483931587849
+
+  phantomjs://platform/console++.js:263 in error

@@ -1,0 +1,91 @@
+#!/bin/bash
+
+if [ -r /dev/sr0 ] ; then
+        echo "CD device is readable"
+else
+	sudo chmod 664 /dev/sr0
+#        ssh localhost -p 443 -l fu-fu "sudo chmod 664 /dev/sr0"
+fi
+
+if [ "$1" != "1" ] ; then
+
+#NEW SCRIPT
+
+
+echo "Append argument 1 to run the old verson of script"
+echo "Running automatically"
+
+echo "add any addition things to the name here (or just hit enter, also be ready)"
+read -e info
+
+#GET CD INFO
+isoinfo -d -i /dev/sr0 > /tmp/iso.info
+bs=$(cat /tmp/iso.info | grep "Logical block size is" | cut -d " " -f 5)
+c=$( cat /tmp/iso.info | grep "Volume size is:" | cut -d " " -f 4)
+id1=$(cat /tmp/iso.info | grep "Volume id:" | cut -d : -f 2)
+id2=${id1:1}
+id=${id2// /_}
+ip="192.168.1.101"
+p=48325
+#THROW IN THE DATE TO make it less lickly to overwrite
+A=`date +%d-%m-%y`
+#See if the additional info had stuff, otherwise ignore.
+if [ -z $info ] ; then
+        name=$id.$A.iso.xz
+else    
+        name=${info// /_}.$id.$A.iso.xz
+fi
+
+echo "bs: $bs"
+echo "count: $c"
+echo "volume id: $id"
+echo "port: $p"
+echo "final name: $name"
+echo "Is this alright?"
+
+#Verify the thing has enough info with human
+read -e al
+if [ "$al" == "y" ]; then
+        echo "starting the clone"
+else 
+        echo "Enter addition info"
+        read -e info
+        name=${info// /_}.$id.$A.iso.xz
+        echo "Final name is: $name"
+fi
+
+#ACTUALLY CLONING
+
+#SETUP busybox connection for disk stoage
+ssh 192.168.1.101 -p 443 -l share "busybox nc -l -p $p > /shared/Shared/cd-rips/$name" &
+sleep 1;
+#start cloning
+dd if=/dev/sr0 conv=noerror bs=$bs count=$c |  xz -z -c -5 | ncat 192.168.1.101 $p
+
+#VERIFY DISKS
+(dd if=/dev/sr0 conv=noerror bs=$bs count=$c | md5sum ; echo " << DISK")
+(ssh 192.168.1.101 -p 443 -l share "cat /shared/Shared/cd-rips/$name | xz -d | md5sum" ; echo " << IMAGE" ) 
+echo "MANUALLY CHECK MD5SUMS"
+wait;
+
+echo "DONE"
+eject
+beep
+
+
+else ##OLD SCRIPT STARTS HERE
+
+echo "Please enter name of disk (will automatically append .iso.xz)"
+read -e disk
+echo $disk.iso.xz
+BB="nc 192.168.1.101"
+P=48325
+#sudo chmod 664 /dev/sr0
+#sudo eject -x 24 /dev/sr0
+ssh 192.168.1.101 -p 443 -l share "busybox nc -l -p $P > /shared/Shared/cd-rips/$disk.iso.xz" &
+( dd if=/dev/sr0 conv=noerror | xz -z -c -5 | ncat 192.168.1.101 $P ) # || ( sudo eject -x 4; dd if=/dev/sr0 bs=4k | xz -z -c -5 |  busybox $BB $P )
+#sudo eject -x 24 /dev/sr0
+echo "Probably done, see terminal for errors."
+sudo eject &
+beep
+fi

@@ -1,0 +1,1 @@
+/home/fu-fu/source/banished/banished.sh
