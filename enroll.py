@@ -6,14 +6,16 @@ if len(sys.argv) != 3:
     print("Unknown username/password")
     sys.exit()
 
-driver=webdriver.Firefox()
+#driver=webdriver.Firefox()
+#driver=webdriver.PhantomJS()
+driver=webdriver.Chrome()
 
 driver.implicitly_wait(10) 
 
 while True:
     try:
-        driver.get("http://my.ucalgary.ca")
-        #driver.get("https://cas.ucalgary.ca/cas/login?service=https://portal.my.ucalgary.ca/psp/paprd/?cmd=start&ca.ucalgary.authent.ucid=true")
+        #driver.get("http://my.ucalgary.ca")
+        driver.get("https://cas.ucalgary.ca/cas/login?service=https://portal.my.ucalgary.ca/psp/paprd/?cmd=start&ca.ucalgary.authent.ucid=true")
         
         #time.sleep(1)
         
