@@ -26,15 +26,18 @@ while True:
         driver.find_element_by_id("signinbutton").submit()
         
         time.sleep(2)
+        driver.get("https://csprd.my.ucalgary.ca/psc/csprd/EMPLOYEE/SA/c/SA_LEARNER_SERVICES.SSS_STUDENT_CENTER.GBL")
+        driver.find_element_by_id("DERIVED_SSS_SCR_SSS_LINK_ANCHOR2").click()
         
         while True:
             #Internal Iframe of the resulting url.
-            driver.get("https://csprd.my.ucalgary.ca/psc/csprd/EMPLOYEE/SA/c/SA_LEARNER_SERVICES.SSS_STUDENT_CENTER.GBL")
+            
         
-            driver.find_element_by_id("DERIVED_SSS_SCR_SSS_LINK_ANCHOR2").click()
             driver.find_element_by_id("DERIVED_REGFRM1_LINK_ADD_ENRL$82$").click()
             driver.find_element_by_id("DERIVED_REGFRM1_SSR_PB_SUBMIT").click()
-            time.sleep(2) #Unknown if actually needed, but here for safety.
+            
+#            time.sleep(2) #Unknown if actually needed, but here for safety.
+            driver.find_element_by_id("DERIVED_REGFRM1_SSR_LINK_STARTOVER").click()
     finally:
         print("relogging in")
 
